@@ -9,7 +9,6 @@
 
 ![AS-IS BPMN](../diagrams/bpmn/AS-IS.png)
 
---
 
 ## 2.2 TO-BE (Целевой процесс)
 
@@ -17,7 +16,6 @@
 
 ![TO-BE BPMN](../diagrams/bpmn/TO-BE.png)
 
---
 
 ## 2.3 Подпроцессы TO-BE
 
@@ -29,7 +27,6 @@
 
 ![Скоринг](../diagrams/bpmn/TO-BE_scoring.png)
 
---
 
 ## Исходные файлы
 
