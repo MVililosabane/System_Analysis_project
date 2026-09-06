@@ -1,0 +1,210 @@
+openapi: 3.0.0
+info:
+  title: МС Клиент API
+  description: |
+    Микросервис Клиент обеспечивает:
+    - Метод 1 — Создание клиента
+    - Метод 2 — Начитывание клиента
+  version: 1.0.0
+
+tags:
+  - name: Client
+    description: Операции с клиентами
+
+paths:
+  /client:
+    post:
+      tags:
+        - Client
+      summary: Создание клиента
+      description: Метод 1. Сохраняет нового клиента в БД. Возвращает уникальный идентификатор клиента.
+      operationId: createClient
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateClientRequest'
+      responses:
+        '201':
+          description: Клиент успешно создан
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateClientResponse'
+        '400':
+          description: Ошибка валидации
+        '409':
+          description: Конфликт данных (дубликат)
+        '500':
+          description: Внутренняя ошибка сервера
+
+  /client/{clientId}:
+    get:
+      tags:
+        - Client
+      summary: Начитывание клиента
+      description: Метод 2. Возвращает данные клиента по его идентификатору.
+      operationId: getClient
+      parameters:
+        - name: clientId
+          in: path
+          required: true
+          description: UUID клиента
+          schema:
+            type: string
+            format: uuid
+          example: "550e8400-e29b-41d4-a716-446655440000"
+      responses:
+        '200':
+          description: Данные клиента успешно получены
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientData'
+        '400':
+          description: Ошибка валидации
+        '404':
+          description: Клиент с указанным Id не найден
+        '500':
+          description: Внутренняя ошибка сервера
+
+components:
+  schemas:
+    CreateClientRequest:
+      type: object
+      required:
+        - lastName
+        - firstName
+        - gender
+        - birthDate
+        - passportSeries
+        - passportNumber
+        - email
+        - phone
+        - maritalStatus
+        - childrenCount
+        - isSalaryClient
+        - employmentStatus
+        - isManager
+        - monthlyIncome
+      properties:
+        lastName:
+          type: string
+          maxLength: 30
+          pattern: '^[А-Яа-я]{2,30}$'
+          description: Фамилия (кириллица, 2-30 букв)
+          example: "Иванов"
+        firstName:
+          type: string
+          maxLength: 30
+          pattern: '^[А-Яа-я]{2,30}$'
+          description: Имя (кириллица, 2-30 букв)
+          example: "Иван"
+        middleName:
+          type: string
+          maxLength: 30
+          pattern: '^[А-Яа-я]{2,30}$'
+          description: Отчество (кириллица, 2-30 букв, необязательно)
+          example: "Иванович"
+        gender:
+          type: string
+          enum: [Мужской, Женский]
+          description: Пол
+          example: "Мужской"
+        birthDate:
+          type: string
+          format: date
+          description: Дата рождения (гггг-мм-дд)
+          example: "1990-05-15"
+        passportSeries:
+          type: string
+          pattern: '^\d{4}$'
+          description: Серия паспорта (4 цифры)
+          example: "1234"
+        passportNumber:
+          type: string
+          pattern: '^\d{6}$'
+          description: Номер паспорта (6 цифр)
+          example: "567890"
+        email:
+          type: string
+          format: email
+          maxLength: 50
+          description: Адрес электронной почты
+          example: "ivanov.i@example.com"
+        phone:
+          type: string
+          maxLength: 20
+          description: Номер телефона
+          example: "+79991234567"
+        maritalStatus:
+          type: string
+          enum: [В браке, Холост]
+          description: Семейное положение
+          example: "В браке"
+        childrenCount:
+          type: integer
+          minimum: 0
+          description: Количество детей
+          example: 2
+        isSalaryClient:
+          type: boolean
+          description: Является ли зарплатным клиентом
+          example: true
+        employmentStatus:
+          type: string
+          enum: [Безработный, Самозанятый, Владелец бизнеса, Наемный работник]
+          description: Рабочий статус
+          example: "Наемный работник"
+        firstEmploymentStartDate:
+          type: string
+          format: date
+          description: Дата начала работы на первом месте
+          example: "2016-01-10"
+        currentEmploymentStartDate:
+          type: string
+          format: date
+          description: Дата начала работы на текущем месте
+          example: "2020-03-15"
+        employerName:
+          type: string
+          maxLength: 100
+          description: Наименование работодателя
+          example: "ООО Ромашка"
+        isManager:
+          type: boolean
+          description: Наличие руководящей должности
+          example: true
+        monthlyIncome:
+          type: number
+          format: double
+          minimum: 0
+          exclusiveMinimum: true
+          description: Ежемесячный доход
+          example: 150000.00
+
+    CreateClientResponse:
+      type: object
+      required:
+        - clientId
+      properties:
+        clientId:
+          type: string
+          format: uuid
+          description: Уникальный идентификатор созданного клиента
+          example: "550e8400-e29b-41d4-a716-446655440000"
+
+    ClientData:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/CreateClientRequest'
+        - type: object
+          required:
+            - clientId
+          properties:
+            clientId:
+              type: string
+              format: uuid
+              description: Уникальный идентификатор клиента
+              example: "550e8400-e29b-41d4-a716-446655440000"
