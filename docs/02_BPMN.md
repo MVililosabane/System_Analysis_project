@@ -7,7 +7,7 @@
 
 На диаграмме показан существующий процесс, который полностью проходит в офлайн-формате.
 
-![AS-IS BPMN](../diagrams/bpmn/AS-IS.png)
+(https://raw.githubusercontent.com/MVililosabane/System_Analysis_project/main/diagrams/bpmn/AS-IS.png)
 
 
 ## 2.2 TO-BE (Целевой процесс)
