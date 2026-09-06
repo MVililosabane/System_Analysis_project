@@ -7,25 +7,25 @@
 
 На диаграмме показан существующий процесс, который полностью проходит в офлайн-формате.
 
-(https://raw.githubusercontent.com/MVililosabane/System_Analysis_project/main/diagrams/bpmn/AS-IS.png)
+![AS-IS BPMN](https://raw.githubusercontent.com/MVililosabane/System_Analysis_project/main/diagrams/bpmn/AS-IS.png)
+
 
 
 ## 2.2 TO-BE (Целевой процесс)
 
 Целевой процесс включает онлайн-взаимодействие с клиентом и автоматизацию ключевых этапов.
 
-![TO-BE BPMN](../diagrams/bpmn/TO-BE.png)
-
+![TO-BE BPMN](https://raw.githubusercontent.com/MVililosabane/System_Analysis_project/main/diagrams/bpmn/TO-BE.png)
 
 ## 2.3 Подпроцессы TO-BE
 
 ### Подача онлайн-заявки
 
-![Подача заявки](../diagrams/bpmn/TO-BE_submit.png)
+![Подача заявки](https://raw.githubusercontent.com/MVililosabane/System_Analysis_project/main/diagrams/bpmn/TO-BE_submit.png)
 
 ### Выполнение скоринга и подбор условий кредита
 
-![Скоринг](../diagrams/bpmn/TO-BE_scoring.png)
+![Скоринг](https://raw.githubusercontent.com/MVililosabane/System_Analysis_project/main/diagrams/bpmn/TO-BE_scoring.png)
 
 
 ## Исходные файлы
